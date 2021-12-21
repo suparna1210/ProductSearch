@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Search Engine</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+<!--===============================================================================================-->
+</head>
+<body>
+	<div class="table">
+		<div class="d-flex">
+			<form  action="/search" method="post">
+						<div class="row header" style="width: 100%;">
+
+							<div class="cell">
+
+								<div class="d-flex">Brand:&nbsp; <input style="width: 200px;" type="text" name="brand" placeholder="Brand" value="{{brand}}"></div>
+							</div>
+							<div class="cell">
+
+								<div class="d-flex">Categories:&nbsp;<input style="width: 200px;" type="text" name="categories" placeholder="Categories" value="{{categories}}"></div>
+							</div>
+							<div class="cell">
+
+								<div class="d-flex">Name:&nbsp;<input style="width: 200px;" type="text" name="name" placeholder="Name" value="{{name}}"></div>
+							</div>
+							<div class="cell">
+								<button type="submit">Search</button>
+							</div>
+						</div>
+
+	</form>
+			<form action="/osearch" method="post">
+						<div class="row header" style="width: 100%;">
+
+
+
+								<input type="text" name="h_brand" hidden placeholder="Brand" value="{{brand}}">
+
+
+
+								<input type="text" name="h_categories" hidden placeholder="Categories" value="{{categories}}">
+
+
+
+								<input type="text" name="h_name" hidden placeholder="Name" value="{{name}}">
+
+							<input hidden type="text" value="{{sortOrder}}" name="sortOrder">
+							<div class="cell">
+								<button type="submit">SortByPrice-{{sortOrder}}</button>
+							</div>
+						</div>
+
+	</form>
+		</div>
+
+		<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+					<div class="table">
+
+						<div class="row header">
+							<!-- <div class="cell">
+								ID
+							</div> -->
+							<div class="cell">
+								Prices
+							</div>
+							<div class="cell">
+								Brand
+							</div>
+							<!-- <div class="cell">
+								Manufacturer
+							</div> -->
+							<div class="cell">
+								Categories
+							</div>
+							<div class="cell">
+								 Name
+							</div>
+							<div class="cell">
+								Date Added
+							</div>
+							<div class="cell">
+								Image Urls
+							</div>
+						</div>
+						{% for data_dict in data_dict_list %}
+						<div class="row">
+							<!-- <div class="cell" data-title="ID">
+								{{data_dict["id"]}}
+							</div> -->
+							<div class="cell" data-title="Prices">
+								{{data_dict["prices"]}}
+							</div>
+							<div class="cell" data-title="Brand">
+								{{data_dict["brand"]}}
+							</div>
+							<!-- <div class="cell" data-title="Manufacturer">
+								{{data_dict["manufacturer"]}}
+							</div> -->
+							<div class="cell" data-title="Categories">
+								{{data_dict["categories"]}}
+							</div>
+							<div class="cell" data-title="Name">
+								{{data_dict["name"]}}
+							</div>
+							<div class="cell" data-title="DateAdded">
+								{{data_dict["dateAdded"]}}
+							</div>
+							<div class="cell" style="width: 2000px;" data-title="ImageURLs">
+								{% for image in data_dict["imageURLs"].split(",") %}
+
+								<img style="height: 50px; width: 50px;" src="{{image}}">
+
+								{% endfor %}
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
